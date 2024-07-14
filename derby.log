@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Jul 14 12:54:32 UTC 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0190-b14f-24b4-000007489af8 
+on database directory /home/rafal/repo/cms/database/new_file with class loader com.intellij.database.remote.jdbc.impl.JdbcClassLoader$JdbcClassLoaderImpl@4563e9ab 
+Loaded from file:/home/rafal/.config/JetBrains/PhpStorm2024.1/jdbc-drivers/Apache%20Derby/10.16.1.1/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=17.0.11+1-b1207.24
+user.dir=/home/rafal/repo/cms
+os.name=Linux
+os.arch=amd64
+os.version=6.8.0-38-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
