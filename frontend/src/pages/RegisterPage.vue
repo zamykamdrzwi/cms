@@ -3,7 +3,7 @@
     <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
       <div class="font-bold text-red-500 text-2xl mb-2" :class="{ 'hidden' : !passwordError }">Errors:</div>
       <ul class="list-disc pl-5 mb-7 text-sm" :class="{ 'hidden' : !passwordError }">
-        <li v-for="error in passwordResult" :key="error">
+        <li v-for="error in errors" :key="error">
           {{ error }}
         </li>
       </ul>
@@ -36,6 +36,7 @@
                  class="mt-1 block w-full px-3 py-2 border-2 border-gray-300
               rounded-md shadow-sm focus:outline-none focus:ring-indigo-500
               focus:border-indigo-500 sm:text-sm text-gray-600"
+                 :class="{ 'border-red-500': emailError }"
           />
         </div>
         <div class="mb-4">
@@ -86,17 +87,38 @@ const isChecked = ref(false);
 const errors = ref([]);
 const passwordError = ref(false);
 const usernameError = ref(false);
+const emailError = ref(false);
 
 const handleRegister = () => {
+  errors.value = [];
+
   const passwordResult = checkPassword(password.value);
   passwordError.value = passwordResult.length > 0;
+  passwordError.value && errors.value.push(...passwordResult);
 
   const usernameResult = checkUsername(username.value);
   usernameError.value = usernameResult !== true;
+  usernameError.value && errors.value.push(usernameResult);
 
-  username.value = '';
-  email.value = '';
-  password.value = '';
+  const emailResult = checkEmail(email.value);
+  emailError.value = emailResult !== true;
+  emailError.value && errors.value.push(emailResult);
+
+  console.log(passwordError.value);
+  console.log(usernameError.value);
+  console.log(emailError.value);
+
+  if(!passwordError.value && !usernameError.value && !emailError.value) {
+    console.info('You have successfully created your account');
+
+    username.value = '';
+    email.value = '';
+    password.value = '';
+  } else {
+    console.error('Failed to create an account');
+
+    password.value = '';
+  }
 }
 
 const checkPassword = (password) => {
@@ -114,5 +136,9 @@ const checkPassword = (password) => {
 
 const checkUsername = (username) => {
   return username.length < 3 ? 'Username must have at least 3 characters' : true;
+}
+
+const checkEmail = (email) => {
+  return email === 'qw@qw.pl' ? 'This email address is already taken' : true;
 }
 </script>
